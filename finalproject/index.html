@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hurricane Katrina Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      mapboxgl.accessToken =
+        '<your Mapbox access token here>';
+      var map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/streets-v11",
+        center: [-90.0, 29.0],
+        zoom: 5,
+      });
+      map.on("load", function () {
+        map.addSource("katrina", {
+          type: "geojson",
+          data:
+            "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson",
+        });
+        map.addLayer({
+          id: "katrina",
+          type: "symbol",
+          source: "katrina",
+          layout: {
+            "icon-image": "circle-15",
+            "icon-size": [
+              "interpolate",
+              ["linear"],
+              ["get", "pressure"],
+              900,
+              0.1,
+              1100,
+              1,
+            ],
+            "icon-allow-overlap": true,
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
