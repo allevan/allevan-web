@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hurricane Katrina Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
+    <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      mapboxgl.accessToken =
+        'pk.eyJ1IjoiYWxsZXZhbiIsImEiOiJjbGVxa3o0bmMwMm5oM3NvY3R5dno1MGZkIn0.Gr_r_00oF-_Np1XQuAzxKg';
+      var map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/allevan/clgbwy904001201mlsg7bm5m4",
+        center: [-90.0, 29.0],
+        zoom: 5,
+      });
+      map.on("load", function () {
+        map.addSource("katrina", {
+          type: "geojson",
+          data:
+            "https://raw.githubusercontent.com/allevan/allevan-web/main/finalproject/hurricane.geojson",
+        });
+        map.addLayer({
+  id: "katrina",
+  type: "circle",
+  source: "katrina",
+  paint: {
+    "circle-radius": [
+      "interpolate",
+      ["linear"],
+      ["get", "Wind_WMO_"],
+      25, 5,
+      36.36, 6,
+      47.72, 7,
+      59.08, 8,
+      70.44, 9,
+      81.8, 10,
+      93.16, 11,
+      104.52, 12,
+      115.88, 13,
+      127.24, 14,
+      138.6, 15,
+      150, 16
+    ],
+    "circle-color": [
+      "interpolate",
+      ["linear"],
+      ["get", "Wind_WMO_"],
+      25, "#0066ff",
+      36.36, "#3385ff",
+      47.72, "#66a3ff",
+      59.08, "#99c2ff",
+      70.44, "#cce0ff",
+      81.8, "#ffcccc",
+      93.16, "#ff99b3",
+      104.52, "#ff6680",
+      115.88, "#ff3355",
+      127.24, "#cc0022",
+      138.6, "#990000",
+      150, "#660000"
+    ],
+    "circle-opacity": 0.7,
+    "circle-stroke-color": "#181717",
+    "circle-stroke-width": 1,
+    "circle-stroke-opacity": 1,
+  },
+});
+      });
+    </script>
+  </body>
+</html>
