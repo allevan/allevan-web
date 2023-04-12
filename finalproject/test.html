@@ -18,10 +18,46 @@
         bottom: 0;
         width: 100%;
       }
+      .legend {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        background-color: #fff;
+        padding: 10px;
+        font-family: Arial, sans-serif;
+        line-height: 18px;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+      .legend h4 {
+        margin-top: 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .legend div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .legend span {
+        display: inline-block;
+        width: 20px;
+        height: 10px;
+        margin-right: 5px;
+      }
     </style>
   </head>
   <body>
     <div id="map"></div>
+    <div class='legend'>
+  <h4>Hurricane Katrina Wind Speed (mph)</h4>
+  <div><span style='background-color:#0066ff;'></span> ≤ 25 mph</div>
+  <div><span style='background-color:#91BFDB;'></span>0°C to 5°C</div>
+  <div><span style='background-color:#E0F3F8;'></span>5°C to 10°C</div>
+  <div><span style='background-color:#FFFFBF;'></span>10°C to 15°C</div>
+  <div><span style='background-color:#FEE090;'></span>15°C to 20°C</div>
+  <div><span style='background-color:#FC8D59;'></span>20°C to 25°C</div>
+</div>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
     <script>
       mapboxgl.accessToken = 'pk.eyJ1IjoiYWxsZXZhbiIsImEiOiJjbGVxa3o0bmMwMm5oM3NvY3R5dno1MGZkIn0.Gr_r_00oF-_Np1XQuAzxKg';
@@ -179,4 +215,5 @@ function animateLine() {
       });
     </script>
   </body>
+</html>
 </html>
