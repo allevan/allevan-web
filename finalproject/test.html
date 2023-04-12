@@ -45,6 +45,20 @@
         height: 10px;
         margin-right: 5px;
       }
+      
+     .windInfo {
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  margin-left: 20px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  border: 2px solid black;
+  overflow: auto;
+  width: 26%;
+  background-color: #fff;
+  border-radius: 3px;
+}
     </style>
   </head>
   <body>
@@ -57,6 +71,10 @@
   <div><span style='background-color:#ff99b3;'></span>≤ 100 mph</div>
   <div><span style='background-color:#cc0022;'></span>≤ 125 mph</div>
   <div><span style='background-color:#660000;'></span>≤ 150 mph</div>
+      
+  <div class="windInfo"></div>
+  <div><strong>Wind Speed:</strong> <span id='wind'></span></div>
+      
 </div>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
     <script>
@@ -205,6 +223,41 @@ function animateLine() {
     "circle-stroke-width": 0.8,
     "circle-stroke-opacity": 1,
   },
+});
+
+var windDisplay = document.getElementById('wind');
+
+map.on('mousemove', 'katrina', (e) => {
+
+  map.getCanvas().style.cursor = 'pointer';
+  // Set variables equal to the current feature's wind speed
+  var windSpeed = e.features[0].properties.Wind_WMO_;
+
+  // Check whether features exist
+  if (e.features.length > 0) {
+    // Display the wind speed in the sidebar
+    windDisplay.textContent = windSpeed;
+
+    // If quakeID for the hovered feature is not null,
+    // use removeFeatureState to reset to the default behavior
+    if (windID) {
+      map.removeFeatureState({
+        source: "katrina",
+        id: windID
+      });
+    }
+
+    windID = e.features[0].OBJECTID;
+
+    // When the mouse moves over the katrina layer, update the
+    // feature state for the feature under the mouse
+    map.setFeatureState({
+      source: 'katrina',
+      id: windID,
+    }, {
+      hover: true
+    });
+  }
 });
       });
     </script>
