@@ -52,11 +52,11 @@
     <div class='legend'>
   <h4>Hurricane Katrina Wind Speed (mph)</h4>
   <div><span style='background-color:#0066ff;'></span> ≤ 25 mph</div>
-  <div><span style='background-color:#91BFDB;'></span>0°C to 5°C</div>
-  <div><span style='background-color:#E0F3F8;'></span>5°C to 10°C</div>
-  <div><span style='background-color:#FFFFBF;'></span>10°C to 15°C</div>
-  <div><span style='background-color:#FEE090;'></span>15°C to 20°C</div>
-  <div><span style='background-color:#FC8D59;'></span>20°C to 25°C</div>
+  <div><span style='background-color:#66a3ff;'></span> ≤ 50 mph</div>
+  <div><span style='background-color:#cce0ff;'></span> ≤ 75 mph</div>
+  <div><span style='background-color:#ff99b3;'></span>≤ 100 mph</div>
+  <div><span style='background-color:#cc0022;'></span>≤ 125 mph</div>
+  <div><span style='background-color:#660000;'></span>≤ 150 mph</div>
 </div>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
     <script>
@@ -194,16 +194,10 @@ function animateLine() {
       ["linear"],
       ["get", "Wind_WMO_"],
       25, "#0066ff",
-      36.36, "#3385ff",
-      47.72, "#66a3ff",
-      59.08, "#99c2ff",
-      70.44, "#cce0ff",
-      81.8, "#ffcccc",
-      93.16, "#ff99b3",
-      104.52, "#ff6680",
-      115.88, "#ff3355",
-      127.24, "#cc0022",
-      138.6, "#990000",
+      50, "#66a3ff",
+      75, "#cce0ff",
+      100, "#ff99b3",
+      125, "#cc0022",
       150, "#660000"
     ],
     "circle-opacity": 0.65,
@@ -215,5 +209,4 @@ function animateLine() {
       });
     </script>
   </body>
-</html>
 </html>
