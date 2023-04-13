@@ -91,6 +91,7 @@
     
    <div class="wind-info">
   <div><strong>Wind Speed:</strong> <span id='wind'</span></div>
+  <div><strong>Day:</strong> <span id='time'</span></div>
   <div><strong>Latitude:</strong> <span id='lat'></span><strong>°</strong></div>
   <div><strong>Longitude:</strong> <span id='long'></span><strong>°</strong></div>
     </div>
@@ -258,6 +259,7 @@ function animateLine() {
 var windDisplay = document.getElementById('wind');
 var latDisplay = document.getElementById('lat');
 var longDisplay = document.getElementById('long');
+var timeDisplay = document.getElementById('time');
 
 map.on('mousemove', 'katrina', (e) => {
 
@@ -266,6 +268,7 @@ map.on('mousemove', 'katrina', (e) => {
   var windSpeed = e.features[0].properties.Wind_WMO_;
   var windlat = e.features[0].properties.Latitude;
   var windlong = e.features[0].properties.Longitude;
+  var windtime = e.features[0].properties.ISO_time;
 
   // Check whether features exist
   if (e.features.length > 0) {
@@ -273,6 +276,7 @@ map.on('mousemove', 'katrina', (e) => {
     windDisplay.textContent = windSpeed;
     latDisplay.textContent = windlat;
     longDisplay.textContent = windlong;
+    timeDisplay.textContent = windtime;
     
 
     // If quakeID for the hovered feature is not null,
